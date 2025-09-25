@@ -60,24 +60,36 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Task $task)
     {
-        //
+        return view('edit',compact('task'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
-        //
+         $validated = $request ->validate([
+            'title' => 'required|string|max:255',
+            'description'=>'required|string|max:255',[
+            'title.required' => 'Please Name your Task!',
+            'title.max' => 'Please keep it short (less than 255 characters)',
+            'description.required' => 'Please describe your task!',
+            'description.max' => 'Please keep it short (less than 255 characters)',
+            ],
+        ]);
+        return redirect('/')->with('success','Task updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(Task $task)
+    {  
+        $task->delete();
+         return redirect('/')->with('success','Task deleted!');
+
+         
     }
 }
