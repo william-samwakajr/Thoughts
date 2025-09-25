@@ -7,28 +7,42 @@
                         name = "title"
                         type = "text"
                         placeholder="Name your task"
-                        class="input input-secondary w-full ">
+                        class="input input-secondary w-full @error('title') input-error @enderror ">
+                        @error('title')
+                                <div class="label">
+
+                        <span class="label-text-alt text-error">{{$message}}</span>
+
+                    </div>
+                        @enderror
                         <textarea
 
                             name="description"
 
                             placeholder="Describe your task"
 
-                            class="textarea textarea-bordered w-full resize-none mt-2"
+                            class="textarea textarea-bordered w-full resize-none mt-2 @error('description') textarea-error @enderror"
 
                             rows="4"
 
                             maxlength="255"
 
-                            required
+                            
 
-                        ></textarea>
+                        >{{ old('description') }}</textarea>
+                        @error('description')
+                                <div class="label">
+
+                        <span class="label-text-alt text-error">{{$message}}</span>
+
+                    </div>
+                        @enderror
+                </div>  
                         <div class="mt-4 flex items-center justify-end">
-                        <button type="submit" class="btn btn-primary btn-base">
-                            Make Task
-                        </button>
+                            <button type="submit" class="btn btn-primary btn-base">
+                                Make Task
+                            </button>
                         </div>
-                    </div    
         </form>
     </div>
 </div>

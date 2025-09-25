@@ -33,7 +33,12 @@ class TaskController extends Controller
     {
         $validated = $request ->validate([
             'title' => 'required|string|max:255',
-            'description'=>'required|string|max:255',
+            'description'=>'required|string|max:255',[
+            'title.required' => 'Please Name your Task!',
+            'title.max' => 'Please keep it short (less than 255 characters)',
+            'description.required' => 'Please describe your task!',
+            'description.max' => 'Please keep it short (less than 255 characters)',
+            ],
         ]);
         \App\Models\Task::create([
             'title'=> $validated['title'],
